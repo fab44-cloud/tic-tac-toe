@@ -1,1 +1,5 @@
-console.log("Hello world!")
+// Gameboard object
+const Gameboard = (() => {
+    // Gameboard array
+    let boardArray = ["", "", "", "", "", "", "", "", ""];
+})();
