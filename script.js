@@ -5,11 +5,12 @@ const Gameboard = (() => {
 
     // Methods
     const markSquare = (index, playerSymbol) => {
-        // console.log(markSquare);
-        if (boardArray[index] === "") {
-            boardArray[index] === playerSymbol;
+        if (index < 0 || index > 8 || boardArray[index] !== "") {
+            console.log("Invalid move! Square is already take or out of bounds.");
+            return false; // Indicates square was already marked
         }
-        return false; // Indicates square was already marked
+        boardArray[index] = playerSymbol;
+        return true; // Indicate move succeeded
     };
 
     const reset = () => {
