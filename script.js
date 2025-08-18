@@ -19,10 +19,22 @@ const Gameboard = (() => {
 
     // This will be the method of getting the entire board that our
     // UI will need to render it.
-    const getBoard = () => boardArray; 
+    const getBoard = () => [...boardArray]; // Returns a copy to prevent direct modification
+
+    // Add a way to visually inspect the board in the console
+    const printBoard = () => {
+        console.log(`
+            ${boardArray[0] || " "} | ${boardArray[1] || " "} | ${boardArray[2] || " "}
+            ---------
+            ${boardArray[3] || " "} | ${boardArray[4] || " "} | ${boardArray[5] || " "}
+            ---------
+            ${boardArray[6] || " "} | ${boardArray[7] || " "} | ${boardArray[8] || " "}
+            ---------
+        `);
+    };
 
     // Publicly accessible methods of the Gameboard object.
-    return { markSquare, reset, getBoard }; 
+    return { markSquare, reset, getBoard, printBoard }; 
 })();
 
 
