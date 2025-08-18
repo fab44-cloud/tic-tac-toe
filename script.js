@@ -43,14 +43,14 @@ const playerFactory = (name, symbol) => {
     return { name, symbol };
 };
 
-const player1 = playerFactory("Player 1", "X");
-const player2 = playerFactory("Player2", "O");
+// const player1 = playerFactory("Player 1", "X");
+// const player2 = playerFactory("Player2", "O");
 
 // Game flow control 
 const GameController = (() => {
     // Properties
     const players = [playerFactory("Player1", "X"), playerFactory("Player 2", "O")]
-    let currentPlayer = player1;
+    let currentPlayer = players[0];
     let gameActive = false;
     let movesMade = 0;
 
@@ -59,6 +59,31 @@ const GameController = (() => {
         [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
         [0, 4, 8], [2, 4, 6] // Diagonals
     ];
+
+    const startGame = () => {
+        Gameboard.reset();
+        currentPlayer = players[0];
+        gameActive = true;
+        movesMade = 0;
+        console.log("Game has started! It is player 1's turn.")
+        Gameboard.printBoard();
+    };
+
+    const handlePlayerMove = (index) => {
+        if (!gameActive) {
+            console.log("Game over! Call startGame() to play again.")
+            return;
+        }
+        // Try to mark the square on the current gameBoard
+        if (Gameboard.markSquare(index, currentPlayer.symbol)){
+            movesMade ++;
+            Gameboard.printBoard();
+
+            // Check for win or draw
+        }
+    }
+    
+
 })();
 
 
