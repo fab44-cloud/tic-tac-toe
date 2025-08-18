@@ -80,8 +80,21 @@ const GameController = (() => {
             Gameboard.printBoard();
 
             // Check for win or draw
+            if (checkWin()) {
+                console.log(`${currentPlayer.name} wins!`);
+                gameActive = false;
+            } else if (checkDraw()) {
+                console.log("It's a draw!")
+                gameActive = false;
+            } else {
+                // If no win or draw, switch player
+                switchPlayer();
+                console.log(`${currentPlayer.name}'s turn`);
+            }
+        } else {
+            // Invalid move already logged by Gameboard.markSquare
         }
-    }
+    };
     
 
 })();
