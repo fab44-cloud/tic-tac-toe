@@ -1,12 +1,12 @@
-// Gameboard object
-const Gameboard = (() => {
+// GameBoard object
+const GameBoard = (() => {
     // gameboard array
     let boardArray = ["", "", "", "", "", "", "", "", ""];
 
     // Methods
     const markSquare = (index, playerSymbol) => {
         if (index < 0 || index > 8 || boardArray[index] !== "") {
-            console.log("Invalid move! Square is already take or out of bounds.");
+            console.log("Invalid move! Square is already taken or out of bounds.");
             return false; // Indicates square was already marked
         }
         boardArray[index] = playerSymbol;
@@ -33,7 +33,7 @@ const Gameboard = (() => {
         `);
     };
 
-    // Publicly accessible methods of the Gameboard object.
+    // Publicly accessible methods of the GameBoard object.
     return { markSquare, reset, getBoard, printBoard }; 
 })();
 
@@ -61,12 +61,12 @@ const GameController = (() => {
     ];
 
     const startGame = () => {
-        Gameboard.reset();
+        GameBoard.reset();
         currentPlayer = players[0];
         gameActive = true;
         movesMade = 0;
         console.log("Game has started! It is player 1's turn.")
-        Gameboard.printBoard();
+        GameBoard.printBoard();
     };
 
     const handlePlayerMove = (index) => {
@@ -75,9 +75,9 @@ const GameController = (() => {
             return;
         }
         // Try to mark the square on the current gameBoard
-        if (Gameboard.markSquare(index, currentPlayer.symbol)){
+        if (GameBoard.markSquare(index, currentPlayer.symbol)){
             movesMade ++;
-            Gameboard.printBoard();
+            GameBoard.printBoard();
 
             // Check for win or draw
             if (checkWin()) {
@@ -92,13 +92,40 @@ const GameController = (() => {
                 console.log(`${currentPlayer.name}'s turn`);
             }
         } else {
-            // Invalid move already logged by Gameboard.markSquare
+            // Invalid move already logged by GameBoard.markSquare
         }
     };
     
+    const checkWin = () => {
+        const board = GameBoard.getBoard() // Get the current board state
+        return winningConditions.some(condition => { // Loop through winning conditions
+            const [a, b, c] = condition; // Destructure the indices for the current condition
+            return (
+                board[a] === currentPlayer.symbol &&
+                board[b] === currentPlayer.symbol &&
+                board[c] === currentPlayer.symbol
+            );
+        });
+    }; 
+
+    const checkDraw = () => {
+        // A draw occurs if all squares are filled (9 moves made) and there's no winner
+        return movesMade === 9 && !checkWin();
+    };
+
+    const switchPlayer = () => {
+        currentPlayer = currentPlayer === players[0] ? players[1] : players[0]
+    };
+
+    return [ startGame, handlePlayerMove ]
 
 })();
 
+//   const gameFunctions = GameController
+//   const startGame = gameFunctions[0]
+//   const handlePlayerMove = gameFunctions[1]
+
+// const [startGame, handlePlayerMove] = GameController;
 
 
 
