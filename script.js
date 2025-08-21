@@ -46,6 +46,26 @@ const playerFactory = (name, symbol) => {
 // const player1 = playerFactory("Player 1", "X");
 // const player2 = playerFactory("Player2", "O");
 
+// displayController object
+const displayController = (() => {
+    const gameBoardElement = document.getElementById("gameBoard");
+    const messageElement = document.getElementById("message");
+
+    const cells = [];
+
+    const init = function() {
+        for (i = 0; i < 9; i++) {
+            const cell = document.createElement("div");
+            cell.classList.add("cell");
+            cell.dataset.index = i;
+            gameBoardElement.appendChild(cell);
+            cells.push(cell);
+            // Add an event listener to each cell for player moves
+            cell.addEventListener("click", () => GameController.handlePlayerMove(i));
+        }
+    };
+})();
+
 // Game flow control 
 const GameController = (() => {
     // Properties
