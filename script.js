@@ -57,13 +57,21 @@ const displayController = (() => {
         for (i = 0; i < 9; i++) {
             const cell = document.createElement("div");
             cell.classList.add("cell");
+            // Attach a custom data attribute called "data-index" to each cell.
+            // The value of this attribute is the current loop index.
+            // This allows you to identify which cell was clicked using JavaScript.
             cell.dataset.index = i;
             gameBoardElement.appendChild(cell);
+            // Add a reference to the newly created cell element to the "cells" array.
+            // This array stores all the cell elements, making it easy to access them later.
+            // For example, to update their content when the game board changes.
             cells.push(cell);
             // Add an event listener to each cell for player moves
             cell.addEventListener("click", () => GameController.handlePlayerMove(i));
         }
     };
+
+    return { init };
 })();
 
 // Game flow control 
@@ -137,7 +145,7 @@ const GameController = (() => {
         currentPlayer = currentPlayer === players[0] ? players[1] : players[0]
     };
 
-    return [ startGame, handlePlayerMove ]
+    return { startGame, handlePlayerMove }  
 
 })();
 
