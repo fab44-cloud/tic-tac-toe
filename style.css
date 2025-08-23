@@ -1,3 +1,34 @@
 body {
     background-color: burlywood;
 }
+
+#gameBoard {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    border: 2px solid slateblue;
+    width: 300px;
+    height: 300px;
+    margin: 20px auto;
+}
+
+.cell {
+    border: 1px solid whitesmoke;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button {
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #0056b3; 
+}
