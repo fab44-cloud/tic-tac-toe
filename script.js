@@ -71,7 +71,17 @@ const displayController = (() => {
         }
     };
 
-    return { init };
+    const renderGameboard = function(gameBoardArray) {
+        for (let i = 0; i < gameBoardArray.length; i++) {
+            cells[i].textContent = gameBoardArray[i];
+        }
+    };
+
+    const displayMessage = function(message) {
+        messageElement.textContent = message;
+    };
+
+    return { init, renderGameboard, displayMessage };
 })();
 
 // Game flow control 
