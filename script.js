@@ -6,6 +6,7 @@ const GameBoard = (() => {
     // Methods
     const markSquare = (index, playerSymbol) => {
         if (index < 0 || index > 8 || boardArray[index] !== "") {
+            console.log(index);
             console.log("Invalid move! Square is already taken or out of bounds.");
             return false; // Indicates square was already marked
         }
@@ -55,7 +56,7 @@ const displayController = (() => {
     const cells = [];
 
     const init = function() {
-        for (i = 0; i < 9; i++) {
+        for (let i = 0; i < 9; i++) {
             const cell = document.createElement("div");
             cell.classList.add("cell");
             // Attach a custom data attribute called "data-index" to each cell.
