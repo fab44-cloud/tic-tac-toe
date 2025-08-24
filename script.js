@@ -6,8 +6,9 @@ const GameBoard = (() => {
     // Methods
     const markSquare = (index, playerSymbol) => {
         if (index < 0 || index > 8 || boardArray[index] !== "") {
-            console.log(index);
-            console.log("Invalid move! Square is already taken or out of bounds.");
+            // console.log(index);
+            // console.log("Invalid move! Square is already taken or out of bounds.");
+            displayController.displayMessage("Invalid move! Square is already taken.");
             return false; // Indicates square was already marked
         }
         boardArray[index] = playerSymbol;
@@ -75,7 +76,7 @@ const displayController = (() => {
 
     const renderGameBoard = function(gameBoardArray) {
         for (let i = 0; i < gameBoardArray.length; i++) {
-            console.log(cells[i]);
+            // console.log(cells[i]);
             cells[i].textContent = gameBoardArray[i];
         }
     };
@@ -113,26 +114,35 @@ const GameController = (() => {
     };
 
     const handlePlayerMove = (index) => {
+        if (!gameActive && movesMade === 0) {
+            return;
+        }
+
         if (!gameActive) {
-            console.log("Game over! Call startGame() to play again.")
+            // console.log("Game over! Call startGame() to play again.")
+            displayController.displayMessage("Game over! Click the button to play again.");
             return;
         }
         // Try to mark the square on the current gameBoard
         if (GameBoard.markSquare(index, currentPlayer.symbol)){
             movesMade ++;
             GameBoard.printBoard();
+            displayController.renderGameBoard(GameBoard.getBoard());
 
             // Check for win or draw
             if (checkWin()) {
-                console.log(`${currentPlayer.name} wins!`);
+                // console.log(`${currentPlayer.name} wins!`);
+                displayController.displayMessage(`${currentPlayer.name} wins!`);
                 gameActive = false;
             } else if (checkDraw()) {
-                console.log("It's a draw!")
+                // console.log("It's a draw!")
+                displayController.displayMessage("It's a draw!")
                 gameActive = false;
             } else {
                 // If no win or draw, switch player
                 switchPlayer();
-                console.log(`${currentPlayer.name}'s turn`);
+                // console.log(`${currentPlayer.name}'s turn`);
+                displayController.displayMessage(`${currentPlayer.name}'s turn`);
             }
         } else {
             // Invalid move already logged by GameBoard.markSquare
