@@ -1,10 +1,16 @@
+:root {
+  --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
 body {
     background-color: burlywood;
+    margin: 0;
+    font-family: var(--system-ui);
 }
 
 .container {
     text-align: center;
-    background-color: #fff;
+    background-color: wheat;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -14,7 +20,7 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
-    border: 2px solid slateblue;
+    border: 2px solid burlywood;
     width: 300px;
     height: 300px;
     margin: 20px auto;
@@ -35,8 +41,14 @@ body {
 
 button {
     font-weight: bold;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    color: white;
+    background-color: salmon;
 }
 
 button:hover {
-    background-color: #0056b3; 
+    background-color: #4d92da;
 }
