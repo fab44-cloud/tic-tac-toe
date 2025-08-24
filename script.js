@@ -47,6 +47,7 @@ const playerFactory = (name, symbol) => {
 // const player2 = playerFactory("Player2", "O");
 
 // displayController object
+// generate game board cells
 const displayController = (() => {
     const gameBoardElement = document.getElementById("gameBoard");
     const messageElement = document.getElementById("message");
@@ -71,8 +72,9 @@ const displayController = (() => {
         }
     };
 
-    const renderGameboard = function(gameBoardArray) {
+    const renderGameBoard = function(gameBoardArray) {
         for (let i = 0; i < gameBoardArray.length; i++) {
+            console.log(cells[i]);
             cells[i].textContent = gameBoardArray[i];
         }
     };
@@ -81,7 +83,7 @@ const displayController = (() => {
         messageElement.textContent = message;
     };
 
-    return { init, renderGameboard, displayMessage };
+    return { init, renderGameBoard, displayMessage };
 })();
 
 // Game flow control 
@@ -103,8 +105,10 @@ const GameController = (() => {
         currentPlayer = players[0];
         gameActive = true;
         movesMade = 0;
-        console.log("Game has started! It is player 1's turn.")
-        GameBoard.printBoard();
+        // console.log("Game has started! It is player 1's turn.")
+        displayController.displayMessage("Game has started! It is player 1's turn.");
+        // GameBoard.printBoard();
+        displayController.renderGameBoard(GameBoard.getBoard());
     };
 
     const handlePlayerMove = (index) => {
@@ -158,6 +162,25 @@ const GameController = (() => {
     return { startGame, handlePlayerMove }  
 
 })();
+
+// Listens for the browser to finish parsing the html document
+document.addEventListener("DOMContentLoaded", () => {
+    // Initialize the display, creating the cell elements and attaching their 
+    // listeners
+    displayController.init();
+    
+    // Get the button by its new ID
+    const startButton = document.getElementById("start-btn");
+    
+    if (startButton) {
+        startButton.addEventListener("click", () => {
+            GameController.startGame();
+        });
+    } else {
+        console.error("Start button not found!");
+    } 
+});
+
 
 //   const gameFunctions = GameController
 //   const startGame = gameFunctions[0]
