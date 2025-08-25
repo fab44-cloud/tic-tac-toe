@@ -53,6 +53,7 @@ const playerFactory = (name, symbol) => {
 const displayController = (() => {
     const gameBoardElement = document.getElementById("gameBoard");
     const messageElement = document.getElementById("message");
+    const resultsElement = document.querySelector(".results-display");
 
     const cells = [];
 
@@ -85,14 +86,18 @@ const displayController = (() => {
         messageElement.textContent = message;
     };
 
-    return { init, renderGameBoard, displayMessage };
+    const clearResults = function() {
+        resultsElement.textContent = "";
+    }
+
+    return { init, renderGameBoard, displayMessage, clearResults };
 })();
 
 // Game flow control 
 const GameController = (() => {
     // Properties
-    const players = [playerFactory("Player1", "X"), playerFactory("Player 2", "O")]
-    let currentPlayer = players[0];
+    let players = []; // Initialize with an empty array
+    let currentPlayer = null;
     let gameActive = false;
     let movesMade = 0;
 
@@ -102,11 +107,14 @@ const GameController = (() => {
         [0, 4, 8], [2, 4, 6] // Diagonals
     ];
 
-    const startGame = () => {
+    const startGame = (player1, player2) => {
+        // Create player objects with names from the inputs
+        players = [playerFactory(player1 || "Player1", "X"), playerFactory(player2 || "Player 2", "0")];
         GameBoard.reset();
         currentPlayer = players[0];
         gameActive = true;
         movesMade = 0;
+        displayController.clearResults();
         // console.log("Game has started! It is player 1's turn.")
         displayController.displayMessage("Game has started! It is player 1's turn.");
         // GameBoard.printBoard();
@@ -120,7 +128,7 @@ const GameController = (() => {
 
         if (!gameActive) {
             // console.log("Game over! Call startGame() to play again.")
-            displayController.displayMessage("Game over! Click the button to play again.");
+            displayController.displayMessage("Game over! Click the start button to play again.");
             return;
         }
         // Try to mark the square on the current gameBoard
