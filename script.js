@@ -86,11 +86,15 @@ const displayController = (() => {
         messageElement.textContent = message;
     };
 
+    const displayResults = function(result) {
+        resultsElement.textContent = result;
+    };
+
     const clearResults = function() {
         resultsElement.textContent = "";
-    }
+    };
 
-    return { init, renderGameBoard, displayMessage, clearResults };
+    return { init, renderGameBoard, displayMessage, displayResults, clearResults };
 })();
 
 // Game flow control 
