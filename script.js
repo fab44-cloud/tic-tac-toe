@@ -112,20 +112,22 @@ const GameController = (() => {
     ];
 
     const startGame = (player1, player2) => {
-        // Create player objects with names from the inputs
+        // Create player objects with name and symbol properties
         players = [playerFactory(player1 || "Player1", "X"), playerFactory(player2 || "Player 2", "0")];
         GameBoard.reset();
+        // currentPlayer is set to one of the objects
         currentPlayer = players[0];
         gameActive = true;
         movesMade = 0;
         displayController.clearResults();
         // console.log("Game has started! It is player 1's turn.")
-        displayController.displayMessage("Game has started! It is player 1's turn.");
+        displayController.displayMessage(`Game has started! It is ${currentPlayer.name}'s turn.`);
         // GameBoard.printBoard();
         displayController.renderGameBoard(GameBoard.getBoard());
     };
 
     const handlePlayerMove = (index) => {
+        console.log(JSON.stringify(currentPlayer));
         if (!gameActive && movesMade === 0) {
             return;
         }
@@ -192,16 +194,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // listeners
     displayController.init();
     
-    // Get the button by its new ID
+    // Get the button by its ID
     const startButton = document.getElementById("start-btn");
+    const player1NameInput = document.getElementById("player1");
+    const player2NameInput = document.getElementById("player2");
     
-    if (startButton) {
-        startButton.addEventListener("click", () => {
-            GameController.startGame();
-        });
-    } else {
-        console.error("Start button not found!");
-    } 
+    startButton.addEventListener("click", () => {
+        const player1Name = player1NameInput.value;
+        const player2Name = player2NameInput.value;
+        GameController.startGame(player1Name, player2Name);
+    });
 });
 
 
