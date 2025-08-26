@@ -42,6 +42,14 @@ h1 {
     transition: background-color 0.2s ease-in-out;
 }
 
+.cell.x {
+    color: salmon;
+}
+
+.cell.o {
+    color: #4d92da;
+}
+
 .player-inputs {
     display: flex;
     justify-content: center;
