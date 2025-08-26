@@ -25,14 +25,14 @@ const GameBoard = (() => {
 
     // Add a way to visually inspect the board in the console
     const printBoard = () => {
-        console.log(`
-            ${boardArray[0] || " "} | ${boardArray[1] || " "} | ${boardArray[2] || " "}
-            ---------
-            ${boardArray[3] || " "} | ${boardArray[4] || " "} | ${boardArray[5] || " "}
-            ---------
-            ${boardArray[6] || " "} | ${boardArray[7] || " "} | ${boardArray[8] || " "}
-            ---------
-        `);
+        // console.log(`
+        //     ${boardArray[0] || " "} | ${boardArray[1] || " "} | ${boardArray[2] || " "}
+        //     ---------
+        //     ${boardArray[3] || " "} | ${boardArray[4] || " "} | ${boardArray[5] || " "}
+        //     ---------
+        //     ${boardArray[6] || " "} | ${boardArray[7] || " "} | ${boardArray[8] || " "}
+        //     ---------
+        // `);
     };
 
     // Publicly accessible methods of the GameBoard object.
@@ -127,7 +127,7 @@ const GameController = (() => {
     };
 
     const handlePlayerMove = (index) => {
-        console.log(JSON.stringify(currentPlayer));
+        // console.log(currentPlayer);
         if (!gameActive && movesMade === 0) {
             return;
         }
@@ -207,11 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-//   const gameFunctions = GameController
-//   const startGame = gameFunctions[0]
-//   const handlePlayerMove = gameFunctions[1]
-
-// const [startGame, handlePlayerMove] = GameController;
 
 
 
