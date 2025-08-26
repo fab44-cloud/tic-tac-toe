@@ -77,8 +77,21 @@ const displayController = (() => {
 
     const renderGameBoard = function(gameBoardArray) {
         for (let i = 0; i < gameBoardArray.length; i++) {
-            // console.log(cells[i]);
+            
+            // Remove existing symbol classes before setting content
+            cells[i].classList.remove("x", "o");
+
+            // Set the cell content
             cells[i].textContent = gameBoardArray[i];
+
+            // Add the correct class based on the symbol
+            if (gameBoardArray[i] === "X") {
+                cells[i].classList.add("x");
+                // console.log(cells[i]);
+            } else if (gameBoardArray[i] === "O") {
+                cells[i].classList.add("o");
+                // console.log(cells[i]);
+            }
         }
     };
 
@@ -113,7 +126,7 @@ const GameController = (() => {
 
     const startGame = (player1, player2) => {
         // Create player objects with name and symbol properties
-        players = [playerFactory(player1 || "Player1", "X"), playerFactory(player2 || "Player 2", "0")];
+        players = [playerFactory(player1 || "Player1", "X"), playerFactory(player2 || "Player 2", "O")];
         GameBoard.reset();
         // currentPlayer is set to one of the objects
         currentPlayer = players[0];
