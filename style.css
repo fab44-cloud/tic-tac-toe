@@ -61,7 +61,14 @@ h1 {
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 10px;
-    min-width: 20ch;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+}
+
+@supports (field-sizing: content) {
+    .player-inputs input {
+        field-sizing: content;
+        min-width: 20ch;
+    }
 }
 
 #results-display {
