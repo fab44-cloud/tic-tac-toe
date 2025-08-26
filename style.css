@@ -16,6 +16,10 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+h1 {
+    color: salmon;
+}
+
 #gameBoard {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -38,12 +42,31 @@ body {
     transition: background-color 0.2s ease-in-out;
 }
 
+.player-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.player-inputs input {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+#message {
+    color: #4d92da;
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
 button {
     font-weight: bold;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 5px;
-    font-size: 1em;
+    font-size: 1.2rem;
     color: white;
     background-color: salmon;
 }
